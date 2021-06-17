@@ -1,0 +1,28 @@
+{
+  "name": "octopus-js-executor-min",
+  "version": "2.0.0",
+  "description": "Octopus JavaScript executor",
+  "main": "index.js",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "axios": "~0.18.1",
+    "cheerio": "^1.0.0-rc.3",
+    "commander": "~4.0.1",
+    "js2xmlparser": "~4.0.0",
+    "jszip": "~3.2.2",
+    "log4js": "~4.1.1",
+    "lz4js": "~0.2.0",
+    "msgpack5": "~4.2.1",
+    "proxy-agent": "~3.1.1",
+    "puppeteer": "^1.5.0",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-stealth": "^2.7.8",
+    "puppeteer-extra-plugin-user-preferences": "^2.2.12",
+    "request": "~2.88.0",
+    "sync-request": "~6.1.0",
+    "util": "~0.12.1",
+    "uuid": "~3.3.3",
+    "zlib": "~1.0.5"
+  }
+}
