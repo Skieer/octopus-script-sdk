@@ -47,5 +47,53 @@ vs code可添加launch.json配置，具体配置信息为：
 }
 ```
 
-第一步：
-npm install
+拉下代码后，运行 npm install , 初始化好代码环境
+
+采集脚本建议放到scripts目录，现有两个示例脚本
+PuppeteerExtractorDemo.js  为使用浏览器来采数据的示例
+RequestExactorDemo.js 为使用request请求方式采集数据
+
+调试的时候需要修改MinNode.js两处代码
+
+设置参数，MainKeys是必填参数
+```
+constructor() {
+    this.parameters = new Map();
+    //此处改成需要调试脚本的参数
+    //Puppeteer demo mainkeys
+    //this.parameters.set('MainKeys',["https://www.toutiao.com/a6949819920771220001"]);
+    //Request demo mainkeys
+    this.parameters.set('MainKeys',["101010100","101020100","101030100"]);
+}
+```
+
+设置要调试的脚本
+```
+async doTask(){
+    try {
+        // 此处改成需要调试的脚本
+        //let Extractor = require('./scripts/PuppeteerExtractorDemo');
+        let Extractor = require('./scripts/RequestExactorDemo');
+        this.extractor = new Extractor(this);
+        //script complete
+        this.extractor.on("finished", function (node, status) {
+            logger.info("finished status" + status);
+        });
+
+        //process data
+        this.extractor.on("dataExtracted", function (node, data) {
+            try {
+                fs.appendFileSync('./data/data.txt', JSON.stringify(data)+"\r\n");
+            } catch(err) {
+                logger.error(err)
+            }
+            
+        });
+
+        this.extractor.start();
+    } catch(ex) {
+        logger.error(ex)
+    }
+    
+}
+```
