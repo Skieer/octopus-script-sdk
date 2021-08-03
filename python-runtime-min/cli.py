@@ -46,7 +46,7 @@ def config_logging(cloud_id: str, user_id: str, task_id: str, subtask_id: str, l
     try:
         DEFAULT_LOG_FORMAT = DEFAULT_LOG_FORMAT_TEMPLATE.replace("--task_id", task_id, 1).replace("--subtask_id", subtask_id, 1).replace("--user_id", user_id, 1).replace("--cloud_id", cloud_id, 1).replace("--lot_no", lot_no, 1).replace("--public_ip", public_ip, 1)
         defalut_formatter = LoggingExceptionFormatter(DEFAULT_LOG_FORMAT, datefmt='%Y-%m-%dT%H:%M:%S')
-        dirs = "./py_executor/logs/"
+        dirs = "./logs/"
         os.makedirs(dirs, exist_ok=True)
         log_file_handler = TimedRotatingFileHandler(filename=dirs+'log', when="MIDNIGHT", interval=1, backupCount=30, encoding="utf-8")
         log_file_handler.suffix = "%Y-%m-%d.log"
