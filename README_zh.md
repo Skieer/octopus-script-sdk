@@ -1,8 +1,7 @@
-# octopus-script-sdk  A SDK to compile your own Octoparse scripts
+# octopus-script-sdk 编写八爪鱼采集脚本的SDK
+js-runtime-min 为node js采集脚本的运行环境
 
-The js-runtime-min section sets the minimum running environment requirements for any node js extraction script.
-
-JavaScript libraries installed on cloud nodes are listed as follows, therefore your scripts should not contain any other libraries outside the list for them to work.
+云节点上已安装的js库包括, 采集脚本不可以应用超出下面列表，否则脚本会运行不起来
 ```
 {
   "dependencies": {
@@ -27,9 +26,10 @@ JavaScript libraries installed on cloud nodes are listed as follows, therefore y
   }
 }
 ```
-The entry point for the program is: index.js
+程序入口为：index.js
 
-Add the following launch.json configuration to your VS Code:
+vs code可添加launch.json配置，具体配置信息为：
+
 ```
 {
     // Use IntelliSense to learn about possible attributes.
@@ -47,14 +47,19 @@ Add the following launch.json configuration to your VS Code:
 }
 ```
 
-Git pull the code and npm-install to set up your coding environment .
-Finish your scripts and put them under the scripts section. Check the following two demo scripts for your needs: PuppeteerExtractorDemo.js is for data extraction through web browsers, and RequestExactorDemo.js is for data extraction by sending requests. 
-Two paraments need to be modified for MinNode.js to work.
-Set your paraments, remember to fill in the MainKeys.
+拉下代码后，运行 npm install , 初始化好代码环境
+
+采集脚本建议放到scripts目录，现有两个示例脚本
+PuppeteerExtractorDemo.js  为使用浏览器来采数据的示例
+RequestExactorDemo.js 为使用request请求方式采集数据
+
+调试的时候需要修改MinNode.js两处代码
+
+设置参数，MainKeys是必填参数
 ```
 constructor() {
     this.parameters = new Map();
-    //Puppeteer demo mainkeys
+    //此处改成需要调试脚本的参数
     //Puppeteer demo mainkeys
     //this.parameters.set('MainKeys',["https://www.toutiao.com/a6949819920771220001"]);
     //Request demo mainkeys
@@ -62,11 +67,11 @@ constructor() {
 }
 ```
 
-Select the script you would like to debug.
+设置要调试的脚本
 ```
 async doTask(){
     try {
-        // Select the script you would like to debug.
+        // 此处改成需要调试的脚本
         //let Extractor = require('./scripts/PuppeteerExtractorDemo');
         let Extractor = require('./scripts/RequestExactorDemo');
         this.extractor = new Extractor(this);
